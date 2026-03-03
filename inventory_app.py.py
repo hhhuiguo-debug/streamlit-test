@@ -12,7 +12,7 @@ st.set_page_config(page_title="Amazon 智能库存管理", layout="wide", page_i
 if 'entered' not in st.session_state:
     st.session_state.entered = False
 
-# --- 3. 核心算法函数 (提前定义) ---
+# --- 3. 核心算法函数 (保持逻辑严密) ---
 def get_ai_prediction(region_name):
     today = datetime.now()
     month = today.month
@@ -50,38 +50,80 @@ def read_file(file):
     return None
 
 # ==========================================
-# 逻辑判断：是显示“封面”还是显示“主工具”
+# 页面渲染逻辑：封面 vs 主系统
 # ==========================================
 
 if not st.session_state.entered:
-    # --- 方案 A：初始加载的“传送门”封面 ---
-    # 使用列布局让内容居中
+    # --- 方案 A：赛博乌萨奇·智能入口 ---
+    st.markdown("""
+        <style>
+        .main-title {
+            font-size: 3.5rem !important;
+            font-weight: 800;
+            background: -webkit-linear-gradient(#ff4b4b, #ffc107);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            margin-bottom: 0px;
+        }
+        .sub-quote {
+            text-align: center;
+            color: #888;
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+        .stButton>button {
+            background-color: #ff4b4b;
+            color: white;
+            border-radius: 20px;
+            height: 3.5em;
+            width: 100%;
+            font-weight: bold;
+            border: none;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 75, 75, 0.3);
+        }
+        .stButton>button:hover {
+            background-color: #ff3333;
+            box-shadow: 0 6px 20px rgba(255, 75, 75, 0.5);
+            transform: translateY(-2px);
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
     _, col_mid, _ = st.columns([1, 2, 1])
     
     with col_mid:
-        st.write("#") # 增加顶部间距
         st.write("#")
-        # 模仿高科技感的居中标题
-        st.markdown("<h1 style='text-align: center;'>🐰</h1>", unsafe_allow_html=True)
-        st.markdown("<h1 style='text-align: center;'>Amazon 智能库存管理平台</h1>", unsafe_allow_html=True)
-        st.markdown("<p style='text-align: center; color: #666;'>AI 驱动的跨境电商全维度商业智能分析系统</p>", unsafe_allow_html=True)
+        st.write("#")
+        st.markdown("<h1 style='text-align: center;'>🐰✨🔮</h1>", unsafe_allow_html=True)
+        st.markdown("<div class='main-title'>Amazon 库存管理</div>", unsafe_allow_html=True)
+        st.markdown("<p class='sub-quote'>“与其被动补货，不如先人一步进行库存管理。”</p>", unsafe_allow_html=True)
         
+        with st.container():
+            st.info("""
+            **📢 实时情报：** - 2026 樱花季预测模型已就绪 🌸
+            - 欧洲站圣帕特里克节权重已注入 ☘️
+            - 库销比风险监控雷达：已开启 🚨
+            """)
+
         st.write("#")
-        # 核心按钮：点击后将 session_state 设为 True 并刷新
-        if st.button("点击进入系统，解锁商业洞察 →", use_container_width=True):
-            st.session_state.entered = True
-            st.rerun()
+        if st.button("开启赛博预言 · 进入系统"):
+            with st.spinner('正在同步全球节假日频率...'):
+                st.session_state.entered = True
+                st.rerun()
             
         st.write("#")
-        st.write("#")
         st.markdown("---")
-        st.markdown("<p style='text-align: center; font-size: 0.8em; color: #999;'>Powered by Google Gemini · Real-time Intelligence Analysis</p>", unsafe_allow_html=True)
+        st.markdown("""
+            <div style='text-align: center; color: #555; font-size: 0.9em;'>
+                <b>Version 2.6</b> | <span style='color: #ff4b4b;'>♥</span> Powered by GOC代运营
+            </div>
+        """, unsafe_allow_html=True)
 
 else:
-    # --- 方案 B：原本的补货工具主界面 ---
-    
-    # 顶部导航条增加一个退出按钮，方便测试
-    if st.sidebar.button("← 退出系统"):
+    # --- 方案 B：原本的主功能首页 ---
+    if st.sidebar.button("← 退出罗盘"):
         st.session_state.entered = False
         st.rerun()
 
@@ -89,7 +131,7 @@ else:
     st.write(f"🕒 **系统预测基准日：{datetime.now().strftime('%Y年%m月%d日')}**") 
     st.divider()
 
-    # --- 侧边栏设置 ---
+    # --- 侧边栏 ---
     st.sidebar.header("⚙️ 预测引擎设置")
     manual_mode = st.sidebar.checkbox("手动覆盖 AI 建议系数")
     global_manual_factor = st.sidebar.slider("手动系数", 0.5, 3.0, 1.0, 0.1) if manual_mode else 1.0
