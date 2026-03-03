@@ -1,9 +1,0 @@
-[server]
-# 允许跨域资源共享 (CORS)
-enableCORS = false
-
-# 关闭 XSRF 保护以支持内嵌
-enableXsrfProtection = false
-
-# 允许外部框架嵌套
-frameAncestors = ["*"]
