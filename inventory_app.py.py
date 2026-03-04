@@ -117,7 +117,7 @@ if not st.session_state.entered:
         st.markdown("---")
         st.markdown("""
             <div style='text-align: center; color: #555; font-size: 0.9em;'>
-                <b>Version 2.6</b> | <span style='color: #ff4b4b;'>♥</span> Powered by GOC代运营
+                <b>Version 2.6</b> | <span style='color: #ff4b4b;'>♥</span> Powered by GOC Amazon代运营
             </div>
         """, unsafe_allow_html=True)
 
