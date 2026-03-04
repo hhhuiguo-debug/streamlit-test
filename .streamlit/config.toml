@@ -1,3 +1,9 @@
 [server]
+# 必须设为 false，允许跨域
 enableCORS = false
+
+# 必须设为 false，防止重定向循环
 enableXsrfProtection = false
+
+# 允许公司域名内嵌（如果知道公司域名，把 * 换成域名更安全）
+frameAncestors = ["*"]
